@@ -14,11 +14,6 @@ export default {
 	components: {
 		SearchInput,
 	},
-	methods: {
-		search(query) {
-			const options = { name: 'Search', query: { q: query } };
-			this.$router.push(options);
-		},
-	},
+	inject: ['search'],
 };
 </script>
