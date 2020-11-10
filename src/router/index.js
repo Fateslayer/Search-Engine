@@ -15,6 +15,14 @@ const routes = [
 		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "search" */ '../views/Search.vue'),
+		beforeEnter: (to, from, next) => {
+			const query = to.query.q;
+			if (query && query.trim() !== '') {
+				next();
+			} else {
+				next('/');
+			}
+		},
 	},
 ];
 
