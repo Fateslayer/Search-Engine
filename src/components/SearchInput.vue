@@ -3,8 +3,9 @@
 		<input
 			required
 			type="text"
-			aria-label="Type here"
 			class="form-control shadow"
+			aria-label="Enter query here"
+			placeholder="Enter query here"
 			aria-describedby="search-button"
 		/>
 		<div class="input-group-append">
