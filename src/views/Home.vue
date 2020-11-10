@@ -16,7 +16,7 @@ export default {
 	},
 	methods: {
 		search(query) {
-			console.log(query);
+			this.$router.push({ name: 'Search', query: { q: query } });
 		},
 	},
 };
