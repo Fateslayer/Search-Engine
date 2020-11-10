@@ -1,4 +1,4 @@
-# search-engine
+# Search Engine
 
 ## Project setup
 
