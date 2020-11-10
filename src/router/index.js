@@ -17,6 +17,7 @@ const routes = [
 			import(/* webpackChunkName: "search" */ '../views/Search.vue'),
 		beforeEnter: (to, from, next) => {
 			const query = to.query.q;
+
 			if (query && query.trim() !== '') {
 				next();
 			} else {
