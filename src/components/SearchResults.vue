@@ -1,7 +1,11 @@
 <template>
-	<div class="results">
+	<div>
 		<template v-if="results.items.length">
-			<p>Results Found</p>
+			<search-result
+				v-for="(item, index) in results.items"
+				:key="index"
+				:result="item"
+			></search-result>
 		</template>
 		<p class="text-center lead" v-else>
 			Your search -
@@ -12,7 +16,12 @@
 </template>
 
 <script>
+import SearchResult from './SearchResult';
+
 export default {
+	components: {
+		SearchResult,
+	},
 	props: {
 		results: {
 			type: Object,
