@@ -16,7 +16,8 @@ export default {
 	},
 	methods: {
 		search(query) {
-			this.$router.push({ name: 'Search', query: { q: query } });
+			const options = { name: 'Search', query: { q: query } };
+			this.$router.push(options);
 		},
 	},
 };
