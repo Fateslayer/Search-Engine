@@ -23,10 +23,16 @@
 
 <script>
 export default {
+	props: {
+		value: {
+			type: String,
+			default: '',
+		},
+	},
 	emits: ['search'],
 	data() {
 		return {
-			query: '',
+			query: this.value,
 		};
 	},
 	methods: {
