@@ -1,5 +1,5 @@
 <template>
-	<div class="min-vh-100">
+	<div class="container py-3">
 		<search-input @search="search"></search-input>
 	</div>
 </template>
