@@ -1,8 +1,9 @@
 <template>
-	<form class="input-group w-50">
+	<form @submit.prevent="search" class="input-group w-50">
 		<input
 			required
 			type="text"
+			v-model.trim="query"
 			class="form-control shadow"
 			aria-label="Enter query here"
 			placeholder="Enter query here"
@@ -19,6 +20,23 @@
 		</div>
 	</form>
 </template>
+
+<script>
+export default {
+	emits: ['search'],
+	data() {
+		return {
+			query: '',
+		};
+	},
+	methods: {
+		search() {
+			this.$emit('search', this.query);
+			this.query = '';
+		},
+	},
+};
+</script>
 
 <style scoped>
 .form-control:focus {
