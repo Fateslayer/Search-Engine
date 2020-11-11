@@ -22,4 +22,12 @@ export default {
 body {
 	font-family: 'Roboto', sans-serif;
 }
+
+.truncate {
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+}
 </style>

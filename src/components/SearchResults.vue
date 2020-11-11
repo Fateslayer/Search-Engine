@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<template v-if="results.items.length">
+			<p class="text-muted">About {{ results.totalResults }} results</p>
 			<search-result
 				v-for="(item, index) in results.items"
 				:key="index"

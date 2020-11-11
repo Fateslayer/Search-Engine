@@ -1,14 +1,18 @@
 <template>
 	<div class="mb-4">
-		<p class="lead m-0">
-			<a :href="result.link">{{ result.title }}</a>
-		</p>
-		<p class="mb-2">
-			<a class="text-muted text-decoration-none" :href="result.link">{{
-				result.link
-			}}</a>
-		</p>
-		<p class="m-0">{{ result.description }}</p>
+		<h5 class="m-0">
+			<a
+				class="d-inline-block text-truncate mw-100"
+				:href="result.link"
+				>{{ result.title }}</a
+			>
+		</h5>
+		<a
+			class="d-inline-block text-muted text-decoration-none text-truncate mw-100"
+			:href="result.link"
+			>{{ result.link }}</a
+		>
+		<p class="m-0 truncate">{{ result.description }}</p>
 	</div>
 </template>
 
