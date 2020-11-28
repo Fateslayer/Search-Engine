@@ -6,6 +6,7 @@
 				v-for="(result, index) in resultData.results"
 				:key="index"
 				:result="result"
+				:queryWords="queryWords"
 			></search-result>
 		</template>
 		<p class="text-center lead" v-else-if="searching">
@@ -34,6 +35,20 @@ export default {
 		searching: {
 			type: Boolean,
 			required: true,
+		},
+	},
+	computed: {
+		queryWords() {
+			let words = this.resultData.query.split(' ');
+			let unique = {};
+
+			words.forEach(word => {
+				unique[word] = '';
+			});
+
+			words = Object.keys(unique);
+
+			return words;
 		},
 	},
 };

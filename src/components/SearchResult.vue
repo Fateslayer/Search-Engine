@@ -12,7 +12,7 @@
 			:href="result.link"
 			>{{ result.link }}</a
 		>
-		<p class="m-0 truncate">{{ result.description }}</p>
+		<p class="m-0 truncate" v-html="description"></p>
 	</div>
 </template>
 
@@ -22,6 +22,24 @@ export default {
 		result: {
 			type: Object,
 			required: true,
+		},
+		queryWords: {
+			type: Array,
+			required: true,
+		},
+	},
+	computed: {
+		description() {
+			let { description } = this.result;
+
+			for (const word of this.queryWords) {
+				description = description.replace(
+					new RegExp(`(${word})`, 'i'),
+					'<strong>$1</strong>'
+				);
+			}
+
+			return description;
 		},
 	},
 };
