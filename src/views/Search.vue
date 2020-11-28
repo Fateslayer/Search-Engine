@@ -2,7 +2,11 @@
 	<div class="container py-3">
 		<search-input :value="query" @search="search"></search-input>
 		<hr />
-		<search-results class="mt-3" :results="results"></search-results>
+		<search-results
+			class="mt-3"
+			:resultData="resultData"
+			:searching="searching"
+		></search-results>
 	</div>
 </template>
 
@@ -19,58 +23,26 @@ export default {
 	data() {
 		return {
 			query: '',
+			resultData: {},
+			searching: false,
 		};
-	},
-	computed: {
-		results() {
-			return {
-				items: [
-					{
-						title:
-							'DFSD - What does DFSD stand for? The Free Dictionary',
-						link: 'https://www.dfsd.org/',
-						description:
-							'Dry fibrin sealant dressing (DFSD) (American Red Cross Holland Laboratory, Rockville, MD) was made of lyophilized clotting proteins purified from pooled human',
-					},
-					{
-						title:
-							'DFSD - What does DFSD stand for? The Free Dictionary',
-						link: 'https://www.dfsd.org/',
-						description:
-							'Dry fibrin sealant dressing (DFSD) (American Red Cross Holland Laboratory, Rockville, MD) was made of lyophilized clotting proteins purified from pooled human',
-					},
-					{
-						title:
-							'DFSD - What does DFSD stand for? The Free Dictionary',
-						link: 'https://www.dfsd.org/',
-						description:
-							'Dry fibrin sealant dressing (DFSD) (American Red Cross Holland Laboratory, Rockville, MD) was made of lyophilized clotting proteins purified from pooled human',
-					},
-					{
-						title:
-							'DFSD - What does DFSD stand for? The Free Dictionary',
-						link: 'https://www.dfsd.org/',
-						description:
-							'Dry fibrin sealant dressing (DFSD) (American Red Cross Holland Laboratory, Rockville, MD) was made of lyophilized clotting proteins purified from pooled human',
-					},
-					{
-						title:
-							'DFSD - What does DFSD stand for? The Free Dictionary',
-						link: 'https://www.dfsd.org/',
-						description:
-							'Dry fibrin sealant dressing (DFSD) (American Red Cross Holland Laboratory, Rockville, MD) was made of lyophilized clotting proteins purified from pooled human',
-					},
-				],
-				query: this.query,
-				page: 1,
-				pages: 9000,
-				totalResults: 900,
-			};
-		},
 	},
 	methods: {
 		setQuery() {
 			this.query = this.$route.query.q;
+			this.getResults();
+		},
+		async getResults() {
+			this.searching = true;
+			this.resultData = {};
+			const url = `http://localhost:3000/search?q=${this.query}`;
+			const response = await fetch(url);
+
+			if (response.ok) {
+				this.resultData = await response.json();
+			}
+
+			this.searching = false;
 		},
 	},
 	created() {
