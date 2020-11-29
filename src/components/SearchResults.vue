@@ -1,22 +1,11 @@
 <template>
 	<div>
-		<template v-if="resultData.results && resultData.results.length">
-			<p class="text-muted">About {{ resultData.total }} results</p>
-			<search-result
-				v-for="(result, index) in resultData.results"
-				:key="index"
-				:result="result"
-				:queryWords="queryWords"
-			></search-result>
-		</template>
-		<p class="text-center lead" v-else-if="searching">
-			Loading...
-		</p>
-		<p class="text-center lead" v-else>
-			Your search -
-			<span class="font-weight-bold">{{ resultData.query }}</span> did not
-			match any documents.
-		</p>
+		<search-result
+			v-for="(result, index) in results"
+			:key="index"
+			:result="result"
+			:queryWords="queryWords"
+		></search-result>
 	</div>
 </template>
 
@@ -28,27 +17,13 @@ export default {
 		SearchResult,
 	},
 	props: {
-		resultData: {
-			type: Object,
+		results: {
+			type: Array,
 			required: true,
 		},
-		searching: {
-			type: Boolean,
+		queryWords: {
+			type: Array,
 			required: true,
-		},
-	},
-	computed: {
-		queryWords() {
-			let words = this.resultData.query.split(' ');
-			let unique = {};
-
-			words.forEach(word => {
-				unique[word] = '';
-			});
-
-			words = Object.keys(unique);
-
-			return words;
 		},
 	},
 };
