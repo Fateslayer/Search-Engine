@@ -12,8 +12,14 @@
 				:results="results"
 				:queryWords="queryWords"
 			></search-results>
+			<pagination
+				:page="page"
+				:total="total"
+				:limit="limit"
+				:query="query"
+			></pagination>
 		</template>
-		<p class="text-center lead" v-else>
+		<p class="text-center lead" v-else-if="!searching">
 			Your query <span class="font-weight-bold">{{ query }}</span> did not
 			match any documents.
 		</p>
@@ -21,11 +27,13 @@
 </template>
 
 <script>
+import Pagination from '../components/Pagination';
 import SearchInput from '../components/SearchInput';
 import SearchResults from '../components/SearchResults';
 
 export default {
 	components: {
+		Pagination,
 		SearchInput,
 		SearchResults,
 	},
