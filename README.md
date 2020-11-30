@@ -1,29 +1,28 @@
-# Search Engine
+# Introduction
 
-## Project setup
+This is the web front-end application which consumes the [Search Engine API](https://github.com/fateslayer/search-engine-api). It's built with [Vue 3](https://vuejs.org).
 
-```
+## Prerequisites
+
+1. [Node.js](https://nodejs.org)
+2. [Nodemon](https://www.npmjs.com/package/nodemon)
+
+## Project Setup
+
+### Install Dependencies
+
+```shell
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compile and Hot Reload for Development
 
-```
+```shell
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compile and Minify for Production
 
-```
+```shell
 npm run build
 ```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
