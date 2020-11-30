@@ -2,9 +2,7 @@
 	<div class="container py-3">
 		<search-input :value="query" @search="search"></search-input>
 		<hr />
-		<p class="text-center lead" v-if="searching">
-			Loading...
-		</p>
+		<spinner v-if="searching"></spinner>
 		<template v-if="results.length">
 			<p class="text-muted">About {{ total }} results</p>
 			<search-results
@@ -19,6 +17,9 @@
 				:query="query"
 			></pagination>
 		</template>
+		<p class="text-center lead" v-else-if="error">
+			{{ error }}
+		</p>
 		<p class="text-center lead" v-else-if="!searching">
 			Your query <span class="font-weight-bold">{{ query }}</span> did not
 			match any documents.
@@ -27,12 +28,14 @@
 </template>
 
 <script>
+import Spinner from '../components/Spinner';
 import Pagination from '../components/Pagination';
 import SearchInput from '../components/SearchInput';
 import SearchResults from '../components/SearchResults';
 
 export default {
 	components: {
+		Spinner,
 		Pagination,
 		SearchInput,
 		SearchResults,
@@ -42,6 +45,7 @@ export default {
 		return {
 			page: 1,
 			limit: 10,
+			error: '',
 			query: '',
 			resultData: {},
 			searching: false,
@@ -79,29 +83,36 @@ export default {
 			this.limit = Math.abs(+this.$route.query.limit || 10);
 		},
 		async getResults() {
+			this.error = '';
 			this.searching = true;
 			this.resultData = {};
 			const url = `http://localhost:3000/search?q=${this.query}&page=${this.page}&limit=${this.limit}`;
-			const response = await fetch(url);
+			const response = await fetch(url).catch(() => {
+				return {};
+			});
 
 			if (response.ok) {
 				this.resultData = await response.json();
+			} else {
+				this.error = 'Something went wrong!';
 			}
 
 			this.searching = false;
 		},
 		redirectIfOutOfBoundsPage() {
-			const query = this.query;
-			const total = this.resultData.total;
-			const count = this.resultData.results.length;
+			if (!this.error) {
+				const query = this.query;
+				const total = this.resultData.total;
+				const count = this.resultData.results.length;
 
-			if (total !== 0 && count === 0) {
-				this.$router.replace({
-					path: '/search',
-					query: {
-						q: query,
-					},
-				});
+				if (total !== 0 && count === 0) {
+					this.$router.replace({
+						path: '/search',
+						query: {
+							q: query,
+						},
+					});
+				}
 			}
 		},
 	},
