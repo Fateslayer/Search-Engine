@@ -1,6 +1,6 @@
 # Introduction
 
-This is the web front-end application which consumes the [Search Engine API](https://github.com/fateslayer/search-engine-api). It's built with [Vue 3](https://vuejs.org).
+This is the web front-end application which consumes [Search Engine API](https://github.com/fateslayer/search-engine-api). It's built with [Vue 3](https://vuejs.org).
 
 ## Prerequisites
 
