@@ -34,7 +34,7 @@ export default {
 
 			for (const word of this.queryWords) {
 				description = description.replace(
-					new RegExp(`(${word})`, 'i'),
+					new RegExp(`(\\b${word}\\b)`, 'i'),
 					'<strong>$1</strong>'
 				);
 			}
